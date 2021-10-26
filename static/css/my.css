@@ -21,7 +21,6 @@ a {
 .post-block {
   background-color: #fff;
 }
-/* stylelint-disable selector-list-comma-newline-after */
 
 .blog-header {
   line-height: 1;
@@ -114,11 +113,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .member-link {
-  font-size: 1.3em;
+  font-size: 20em;
   /* margin: 20px;
   padding: 3px; */
   font-family: "Playfair Display", Georgia, "Times New Roman", serif/*rtl:Amiri, Georgia, "Times New Roman", serif*/;
 }
+
 
 .post-footer {
   font-size: 1.1em;

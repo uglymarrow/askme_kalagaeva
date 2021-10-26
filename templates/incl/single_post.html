@@ -1,0 +1,44 @@
+{% load static %}
+
+<div class="row row-cols-1 g-0 border rounded overflow-hidden  mb-4 shadow-md  position-relative post-block">
+    <div class="row d-flex flex-wrap">
+        <div class="col-3 p-4">
+            <img class="card-img-center img-fluid  " src="{% static 'img/gamabunta.jpg' %}" alt="Avatar">
+        </div>
+
+        <div class="col-9 p-4 ">
+            <h3 class="mb-2"> {{ question.title}} Where is Jiraiya?</h3>
+            <div class="mb-2 text-muted">Nov 11</div>
+            <p class="mb-2"> {{ question.text }}
+                What's your wish? Peace? Money? Or the world? Whatever you wish for, it's something you
+                have to get with your own strength!
+            </p>
+            <a href="#">Continue reading</a>
+        </div>
+    </div>
+
+    <div class="col p-4 post-footer">
+        <ul class="list-unstyled d-flex postd-data justify-content-around">
+            <li class="post-rating">
+                <button type="button" class="btn btn btn-light">
+                    <i class="bi bi-hand-thumbs-up-fill"></i>
+                </button>
+                <span class="likes-rating"> 6 </span>
+                <button type="button" class="btn btn btn-light">
+                    <i class="bi bi-hand-thumbs-down-fill"></i>
+                </button>
+            </li>
+            <li>
+                <i class="bi bi-chat-square-fill"></i>
+                <a href="#">Answers (<span class="answers-number">3</span>) </a>
+            </li>
+            <li>
+                <i class="bi bi-tags-fill"></i>
+                <span>Tags:</span>
+                <a href="#">Python </a>
+                <span>,</span>
+                <a href="#">SQL </a>
+            </li>
+        </ul>
+    </div>
+</div>
