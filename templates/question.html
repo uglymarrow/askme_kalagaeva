@@ -8,7 +8,7 @@
     <div class="row row-cols-1 g-0  overflow-hidden  mb-4 shadow-md  position-relative post-block">
         <div class="row d-flex flex-wrap">
             <div class="col-3 p-4">
-                <img class="card-img-center img-fluid " src="/static/img/jiraiya.jpeg" alt="Avatar">
+                <img class="card-img-center img-fluid " src="{% static 'img/gamabunta.jpg' %}" alt="Avatar">
 
                 <div class="rating d-flex justify-content-center align-items-center mt-2">
                     <button type="button" class="btn btn btn-light">
@@ -22,13 +22,10 @@
             </div>
 
             <div class="col-9 p-4 ">
-                <h3 class="mb-2">Baka, baka, baka!! They found out I was peeking! Is my research ruined?
+                <h3 class="mb-2"> {{question.title}}   
                 </h3>
                 <div class="mb-2 text-muted">Nov 11</div>
-                <p class="mb-2">Now my job is to help the next generation and set a good example for them.
-                    And for that, I’ll gladly lay down my life, and I’ll be smiling the whole time. It’s
-                    what makes us old
-                    guys cool, you see.</p>
+                <p class="mb-2"> {{question.text}} </p>
 
                 <div class="tags pt-2">
                     <i class="bi bi-tags-fill"></i>
@@ -60,7 +57,7 @@
     </div>
     <!-- /Input comment -->
 
-    {% include "incl/pagination.html" %}
+    {% include "incl/pagination.html" with page=comments %}
 
 </div>
 {% endblock content%}

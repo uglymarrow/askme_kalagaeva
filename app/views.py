@@ -6,9 +6,9 @@ from django.shortcuts import render
 
 questions = [
     {
-        "title": f"Title {i}",
+        "title": f"Title {i}. Where is Jiraiya? ",
         "id" : i,
-        "text": f"This is text for {i} questions."
+        "text": f"This is text for {i} questions. What's your wish? Peace? Money? Or the world? Whatever you wish for, it's something you have to get with your own strength!"
     } for i in range(25)
 ]
 
@@ -18,14 +18,14 @@ def index(request):
     page = request.GET.get('page')
     content = paginator.get_page(page)
 
-    return render(request, "index.html", {'questions' : content})
+    return render(request, "index.html", {'questions':content})
 
 def hot(request):
     paginator = Paginator(questions, 20)
     page = request.GET.get('page')
     content = paginator.get_page(page)
 
-    return render(request, "hot.html", {'questions' : content})
+    return render(request, "hot.html", {'questions':content})
 
 def tag(request):
     return render(request, "index.html", {}) #что-то с этим сделать \ здесь должно быть имя тэга
@@ -33,7 +33,7 @@ def tag(request):
 comments = [
     {
         "text": f"This is comment number {i}."
-    } for i in range(5)
+    } for i in range(25)
 ]
 
 def question(request, id):
@@ -41,7 +41,7 @@ def question(request, id):
     page = request.GET.get('page')
     content = paginator.get_page(page)
 
-    return render(request, "question.html", {'comments' : content}) #здесь должен быть номер вопроса
+    return render(request, "question.html", {'comments': content, 'question':questions[id]}) #здесь должен быть номер вопроса
 
 def login(request):
     return render(request, "login.html", {})
