@@ -27,14 +27,14 @@
             </li>
             <li>
                 <i class="bi bi-chat-square-fill"></i>
-                <a href="#">Answers (<span class="answers-number">3</span>) </a>
+                <a href="{% url 'question' question.id %}">Answers (<span class="answers-number">3</span>) </a>
             </li>
             <li>
                 <i class="bi bi-tags-fill"></i>
                 <span>Tags:</span>
-                <a href="#">Python </a>
+                <a href="{% url 'tag' 'Python' %}">Python </a>
                 <span>,</span>
-                <a href="#">SQL </a>
+                <a href="{% url 'tag' 'SQL' %}">SQL </a>
             </li>
         </ul>
     </div>

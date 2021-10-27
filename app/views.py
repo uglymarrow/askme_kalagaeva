@@ -27,8 +27,12 @@ def hot(request):
 
     return render(request, "hot.html", {'questions':content})
 
-def tag(request):
-    return render(request, "index.html", {}) #что-то с этим сделать \ здесь должно быть имя тэга
+def tag(request, tag_name):
+    paginator = Paginator(questions, 20)
+    page = request.GET.get('page')
+    content = paginator.get_page(page)   
+    return render(request, "tag.html", {'questions':content, 'tag_name':tag_name}) #что-то с этим сделать \ здесь должно быть имя тэга
+
 
 comments = [
     {
