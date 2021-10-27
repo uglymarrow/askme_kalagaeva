@@ -4,10 +4,6 @@ from django.shortcuts import render
 
 # Create your views here. контроллеры django.
 
-def index(request):
-    return render(request, "index.html", {})
-
-
 questions = [
     {
         "title": f"Title {i}",
@@ -15,6 +11,14 @@ questions = [
         "text": f"This is text for {i} questions."
     } for i in range(25)
 ]
+
+
+def index(request):
+    paginator = Paginator(questions, 20)
+    page = request.GET.get('page')
+    content = paginator.get_page(page)
+
+    return render(request, "index.html", {'questions' : content})
 
 def hot(request):
     paginator = Paginator(questions, 20)
@@ -26,8 +30,18 @@ def hot(request):
 def tag(request):
     return render(request, "index.html", {}) #что-то с этим сделать \ здесь должно быть имя тэга
 
-def question(request):
-    return render(request, "question.html", {}) #здесь должен быть номер вопроса
+comments = [
+    {
+        "text": f"This is comment number {i}."
+    } for i in range(5)
+]
+
+def question(request, id):
+    paginator = Paginator(comments, 20)
+    page = request.GET.get('page')
+    content = paginator.get_page(page)
+
+    return render(request, "question.html", {'comments' : content}) #здесь должен быть номер вопроса
 
 def login(request):
     return render(request, "login.html", {})

@@ -1,244 +1,27 @@
+{% extends "incl/base.html" %}
 {% load static %}
 
-<!doctype html>
-<html lang="en">
+{% block content %}
+<div class="col-md-8">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-
-  <title>AskMe</title>
-
-  <!-- Bootstrap core CSS -->
-  <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
-  <link href="{% static "css/bootstrap-icons.css" %}" rel="stylesheet">
-  <link href="{% static "css/my.css" %}" rel="stylesheet">
-
-</head>
-
-<body>
-  <!-- Navbar -->
-  <div class="container">
-    <header class="blog-header py-3">
-      <div class="row flex-nowrap justify-content-between align-items-center">
-        <div class="col-2 ">
-          <a class="blog-header-logo text-dark" href="#">AskMe</a>
-        </div>
-
-        <div class="col-4 text-center d-flex justify-content-between">
-          <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
-          <button class="btn btn-outline-success ml-1 btn-lg" >ASK!</button>
-        </div>
-
-        <div class="col-4 d-flex justify-content-center align-items-center">
-          <a class="btn btn-m btn-outline-secondary btn-margin" href="#">Sign in</a>
-          <a class="btn btn-m btn-outline-secondary btn-margin" href="#">Sign up</a>
-        </div>
-        
-      </div>
-    </header>
-  </div>
-  <!-- Navbar -->
-  <main class="container">
-
-
-    <div class="row g-5">
-      <div class="col-md-8">
-
-        <!-- Question headers -->
-        <div class="row  mt-4 mb-3">
-          <div class="col-md-7 ">
-            <h3 class="fst-italic text-center"> New Questions </h3>
-          </div>
-          <div class="col-md-5">
-            <h5 class="fst-italic text-center pt-2 "><a href="#">Hot Questions </a></h5>
-          </div>
-        </div>
-        <!-- Question headers -->
-
-        <!-- Posts -->
-        <div class="row row-cols-1 g-0 border rounded overflow-hidden  mb-4 shadow-md  position-relative post-block">
-          <div class="row d-flex flex-wrap">
-            <div class="col-3 p-4">
-              <img class="card-img-center img-fluid  " src="{% static "img/Sasuke.jpg" %}" alt="Sasuke">
-            </div>
-
-            <div class="col-9 p-4 ">
-              <h3 class="mb-2">How return to Konoha?</h3>
-              <div class="mb-2 text-muted">Nov 11</div>
-              <p class="mb-2">Narutooooooooooooooo!!! My name is Sasuke Uchiha. I hate a lot of things, and I don't
-                particularly like anything.</p>
-              <a href="#">Continue reading</a>
-            </div>
-          </div>
-
-          <div class="col p-4 post-footer">
-            <ul class="list-unstyled d-flex postd-data justify-content-around">
-              <li class="post-rating">
-                <button type="button" class="btn btn btn-light">
-                  <i class="bi bi-hand-thumbs-up-fill"></i>
-                </button>
-                <span class="likes-rating"> 6 </span>
-                <button type="button" class="btn btn btn-light">
-                  <i class="bi bi-hand-thumbs-down-fill"></i>
-                </button>
-              </li>
-              <li>
-                <i class="bi bi-chat-square-fill"></i>
-                <a href="#">Answers (<span class="answers-number">3</span>) </a>
-              </li>
-              <li>
-                <i class="bi bi-tags-fill"></i>
-                <span>Tags:</span>
-                <a href="#">Python </a>
-                <span>,</span>
-                <a href="#">SQL </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="row row-cols-1 g-0 border rounded overflow-hidden  mb-4 shadow-md  position-relative post-block">
-          <div class="row d-flex flex-wrap">
-            <div class="col-3 p-4">
-              <img class="card-img-center img-fluid  " src="{% static "img/gamabunta.jpg" %}" alt="Sasuke">
-            </div>
-
-            <div class="col-9 p-4 ">
-              <h3 class="mb-2">Where is Jiraiya?</h3>
-              <div class="mb-2 text-muted">Nov 11</div>
-              <p class="mb-2">What's your wish? Peace? Money? Or the world? Whatever you wish for, it's something you
-                have to get with your own strength!</p>
-              <a href="#">Continue reading</a>
-            </div>
-          </div>
-
-          <div class="col p-4 post-footer">
-            <ul class="list-unstyled d-flex postd-data justify-content-around">
-              <li class="post-rating">
-                <button type="button" class="btn btn btn-light">
-                  <i class="bi bi-hand-thumbs-up-fill"></i>
-                </button>
-                <span class="likes-rating"> 6 </span>
-                <button type="button" class="btn btn btn-light">
-                  <i class="bi bi-hand-thumbs-down-fill"></i>
-                </button>
-              </li>
-              <li>
-                <i class="bi bi-chat-square-fill"></i>
-                <a href="#">Answers (<span class="answers-number">3</span>) </a>
-              </li>
-              <li>
-                <i class="bi bi-tags-fill"></i>
-                <span>Tags:</span>
-                <a href="#">Python </a>
-                <span>,</span>
-                <a href="#">SQL </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="row row-cols-1 g-0 border rounded overflow-hidden  mb-4 shadow-md  position-relative post-block">
-          <div class="row d-flex flex-wrap">
-            <div class="col-3 p-4">
-              <img class="card-img-center img-fluid  " src="{% static "img/jiraiya.jpeg"%}" alt="Sasuke">
-            </div>
-
-            <div class="col-9 p-4 ">
-              <h3 class="mb-2">Baka, baka, baka!! They found out I was peeking! Is my research ruined?</h3>
-              <div class="mb-2 text-muted">Nov 11</div>
-              <p class="mb-2">Now my job is to help the next generation and set a good example for them.
-                And for that, I’ll gladly lay down my life, and I’ll be smiling the whole time. It’s what makes us old
-                guys cool, you see.</p>
-              <a href="#">Continue reading</a>
-            </div>
-          </div>
-
-          <div class="col p-4 post-footer">
-            <ul class="list-unstyled d-flex postd-data justify-content-around">
-              <li class="post-rating">
-                <button type="button" class="btn btn btn-light">
-                  <i class="bi bi-hand-thumbs-up-fill"></i>
-                </button>
-                <span class="likes-rating"> 6 </span>
-                <button type="button" class="btn btn btn-light">
-                  <i class="bi bi-hand-thumbs-down-fill"></i>
-                </button>
-              </li>
-              <li>
-                <i class="bi bi-chat-square-fill"></i>
-                <a href="#">Answers (<span class="answers-number">3</span>) </a>
-              </li>
-              <li>
-                <i class="bi bi-tags-fill"></i>
-                <span>Tags:</span>
-                <a href="#">Python </a>
-                <span>,</span>
-                <a href="#">SQL </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <!-- Posts -->
-
-        <ul class="pagination">
-          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item"><a class="page-link" href="#">Next</a></li>
-        </ul>
-
-      </div>
-
-      <!-- Tags and members -->
-      <div class="col-md-4">
-        <div class="position-sticky" style="top: 2rem;">
-
-          <div class="p-4 ">
-            <h4 class="fst-italic text-center">Popular Tags</h4>
-            <ol class="list-unstyled d-flex flex-wrap justify-content-around mt-3">
-              <li><a class="tag-link" href="#">Perl</a></li>
-              <li><a class="tag-link" href="#">Java</a></li>
-              <li><a class="tag-link" href="#">Python</a></li>
-              <li><a class="tag-link" href="#">C++</a></li>
-              <li><a class="tag-link" href="#">JavaScript</a></li>
-              <li><a class="tag-link" href="#">Ruby</a></li>
-              <li><a class="tag-link" href="#">Assembler</a></li>
-              <li><a class="tag-link" href="#">PHP</a></li>
-            </ol>
-          </div>
-
-          <div class="p-4 ">
-            <h4 class="fst-italic text-center">Best Members</h4>
-            <ol class="list-unstyled mt-3">
-              <li><a class="member-link" href="#">Naruto</a></li>
-              <li><a class="member-link" href="#">Kakashi Sensei</a></li>
-              <li><a class="member-link" href="#">Sakura</a></li>
-            </ol>
-          </div>
-
-        </div>
-      </div>
-      <!-- Tags and members -->
-
+  <!-- Main headers -->
+  <div class="row  mt-4 mb-3">
+    <div class="col-md-7 ">
+      <h3 class="fst-italic text-center"> New Questions </h3>
     </div>
+    <div class="col-md-5">
+      <h5 class="fst-italic text-center pt-2 "><a href="{% url 'hot' %}">Hot Questions </a></h5>
+    </div>
+  </div>
+  <!-- /Main headers -->
 
-  </main>
+  <!-- Posts -->
+  {% for question in questions %}
+    {% include "incl/single_post.html" %}
+  {% endfor %}
+  <!-- /Posts -->
 
-  <!-- footer -->
-  <footer class="blog-footer">
-    <p>
-      <a href="#">Back to top</a>
-    </p>
-  </footer>
-  <!-- footer -->
+  {% include "incl/pagination.html" %}
 
-</body>
-
-</html>
+</div>
+{% endblock content%}
