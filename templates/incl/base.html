@@ -72,22 +72,25 @@
           <div class="p-4 ">
             <h4 class="fst-italic text-center">Popular Tags</h4>
             <ol class="list-unstyled d-flex flex-wrap justify-content-around mt-3">
-              <li><a class="tag-link" href="{% url 'tag' 'Perl' %}">Perl</a></li>
+              {% for tag in popular_tags %}
+              <li><a class="tag-link" href="{% url 'tag' str=tag.name %}">{{ tag.name }}</a></li>
+              {% endfor %}
+              <!-- <li><a class="tag-link" href="{% url 'tag' 'Perl' %}">Perl</a></li>
               <li><a class="tag-link" href="{% url 'tag' 'Java' %}">Java</a></li>
               <li><a class="tag-link" href="{% url 'tag' 'Python' %}">Python</a></li>
               <li><a class="tag-link" href="{% url 'tag' 'JavaScript' %}">JavaScript</a></li>
               <li><a class="tag-link" href="{% url 'tag' 'Ruby' %}">Ruby</a></li>
               <li><a class="tag-link" href="{% url 'tag' 'Assembler' %}">Assembler</a></li>
-              <li><a class="tag-link" href="{% url 'tag' 'PHP' %}">PHP</a></li>
+              <li><a class="tag-link" href="{% url 'tag' 'PHP' %}">PHP</a></li> -->
             </ol>
           </div>
 
           <div class="p-4 ">
             <h4 class="fst-italic text-center">Best Members</h4>
             <ol class="list-unstyled mt-3">
-              <li><a class="member-link" href="#">Naruto</a></li>
-              <li><a class="member-link" href="#">Kakashi Sensei</a></li>
-              <li><a class="member-link" href="#">Sakura</a></li>
+              {% for member in members %}
+              <li><span class="member-link">{{ member }}</span></li>
+              {% endfor %}
             </ol>
           </div>
 

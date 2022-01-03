@@ -119,7 +119,7 @@ class Command(BaseCommand):
             )
         )
         author_ids = list(
-                    Profile.objects.values_list(
+            Profile.objects.values_list(
                 'id', flat=True
             )
         )
@@ -173,9 +173,9 @@ class Command(BaseCommand):
         sizes = [10001, 11000, 100001, 1000001, 900000, 2000001]
 
 
-        # self.fill_profiles(sizes[0])
+        self.fill_profiles(sizes[0])
         self.fill_tags(sizes[1])
-        # self.fill_questions(sizes[2])
+        self.fill_questions(sizes[2])
         self.fill_answers(sizes[3])
         self.fill_question_likes(sizes[5])
         self.fill_answer_likes(sizes[5])

@@ -7,19 +7,21 @@
   <!-- Main headers -->
   <div class="row  mt-4 mb-3">
     <div class="col-md-7 ">
-      <h3 class="fst-italic text-center"> Tag: {{tag_name}} </h3>
+      <h3 class="fst-italic text-center"> Tag: {{tag}} </h3>
     </div>
   </div>
   <!-- /Main haders -->
 
   <!-- Posts -->
-  {% for question in questions %}
+  {% for question in object_list %}
     {% include "incl/single_post.html" %}
   {% endfor %}
   <!-- /Posts -->
 
 
-  {% include "incl/pagination.html" with page=questions %}
+  {% block navigation %}
+  {% include "incl/pagination.html" %}
+  {% endblock navigation %}
 
 </div>
 {% endblock content%}

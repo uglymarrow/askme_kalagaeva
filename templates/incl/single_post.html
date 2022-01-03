@@ -3,38 +3,47 @@
 <div class="row row-cols-1 g-0 border rounded overflow-hidden  mb-4 shadow-md  position-relative post-block">
     <div class="row d-flex flex-wrap">
         <div class="col-3 p-4">
-            <img class="card-img-center img-fluid  " src="{% static 'img/gamabunta.jpg' %}" alt="Avatar">
+            <img class="card-img-center img-fluid  " src="{{ question.author.avatar.url }}" alt="Avatar">
         </div>
 
         <div class="col-9 p-4 ">
-            <h3 class="mb-2"> {{ question.title}} </h3>
-            <div class="mb-2 text-muted">Nov 11</div>
-            <p class="mb-2"> {{ question.text }}</p>
-            <a href="{% url 'question' question.id %}">Continue reading</a>
+            <a href="{% url 'question' pk=question.id %}">
+                <h2>{{ question.header }}</h2>
+            </a>
+            <div class="mb-2 text-muted">{{ question.author.nickname }}</div>
+            <!-- <h3 class="mb-2"> {{ question.header}} </h3> -->
+            <div class="mb-2 text-muted">{{ question.date }}</div>
+            <p class="mb-2"> {{ question.content }}</p>
+            <!-- <a href="{% url 'question' question.id %}">Continue reading</a> -->
         </div>
     </div>
 
     <div class="col p-4 post-footer">
         <ul class="list-unstyled d-flex postd-data justify-content-around">
-            <li class="post-rating">
+            <li class="post-rating col p-1">
                 <button type="button" class="btn btn btn-light">
                     <i class="bi bi-hand-thumbs-up-fill"></i>
                 </button>
-                <span class="likes-rating"> 6 </span>
+                {% if question.rating %}
+                <span class="likes-rating"> {{ question.rating }} </span>
+                {% else %}
+                <span class="likes-rating"> {{ 0 }} </span>
+                {% endif %}
                 <button type="button" class="btn btn btn-light">
                     <i class="bi bi-hand-thumbs-down-fill"></i>
                 </button>
             </li>
-            <li>
+            <li class="col p-1">
                 <i class="bi bi-chat-square-fill"></i>
-                <a href="{% url 'question' question.id %}">Answers (<span class="answers-number">3</span>) </a>
+                <a href="{% url 'question' question.id %}">Answers (<span
+                        class="answers-number">{{question.answers.all.count}}</span>) </a>
             </li>
-            <li>
+            <li class="col p-10">
                 <i class="bi bi-tags-fill"></i>
                 <span>Tags:</span>
-                <a href="{% url 'tag' 'Python' %}">Python </a>
-                <span>,</span>
-                <a href="{% url 'tag' 'SQL' %}">SQL </a>
+                {% for tag in question.tags.all %}
+                <a href="{% url 'tag' str=tag %}">{{ tag }}</a>
+                {% endfor %}
             </li>
         </ul>
     </div>

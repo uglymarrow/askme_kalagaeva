@@ -16,12 +16,14 @@
   <!-- /Main headers -->
 
   <!-- Posts -->
-  {% for question in questions %}
-    {% include "incl/single_post.html" %}
+  {% for question in object_list %}
+  {% include "incl/single_post.html" %}
   {% endfor %}
   <!-- /Posts -->
 
-  {% include "incl/pagination.html" with page=questions %}
+  {% block navigation %}
+  {% include "incl/pagination.html" %}
+  {% endblock navigation %}
 
 </div>
 {% endblock content%}
