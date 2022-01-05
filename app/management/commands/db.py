@@ -74,9 +74,9 @@ class Command(BaseCommand):
         tags = set()
         tags_list = []
         for i in range(cnt):
-            tag = fake.unique.word
+            tag = "tag"
             while tag in tags:
-                tag = fake.unique.word
+                tag += str(i)
 
                 # tag += '_' + fake.unique().word
                 # if len(tag) > 49:
@@ -171,7 +171,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         sizes = [10001, 11000, 100001, 1000001, 900000, 2000001]
-
+        # sizes = [120, 130, 140, 150, 160, 170]
 
         self.fill_profiles(sizes[0])
         self.fill_tags(sizes[1])
