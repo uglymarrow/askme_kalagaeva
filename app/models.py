@@ -60,12 +60,11 @@ class Answer(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    nickname = models.CharField(max_length=255)
     avatar = models.ImageField()
     objects = ProfileManager()
 
     def __str__(self):
-        return self.nickname
+        return self.user.__str__()
 
 
 class QuestLike(models.Model):

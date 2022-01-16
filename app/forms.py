@@ -15,16 +15,12 @@ class QuestionForm(forms.ModelForm):
         model = Question
         fields = ['header', 'content']
 
-
 class RegisterForm(UserCreationForm):
     email = forms.EmailField()
-    nickname = forms.CharField()
     avatar = forms.ImageField()
 
-
-
-# class SettingsForm(forms.Form):
-#     username = forms.CharField()
-#     email = forms.EmailField()
-#     avatar = forms.ImageField()
+class SettingsForm(forms.Form):
+    username = forms.CharField()
+    email = forms.EmailField()
+    avatar = forms.ImageField()
 

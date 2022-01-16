@@ -1,63 +1,3 @@
-''' from django.http import HttpResponse
-from django.core.paginator import Paginator
-from django.shortcuts import render
-
-# Create your views here. контроллеры django.
-
-questions = [
-    {
-        "title": f"Title {i}. Where is Jiraiya? ",
-        "id" : i,
-        "text": f"This is text for {i} questions. What's your wish? Peace? Money? Or the world? Whatever you wish for, it's something you have to get with your own strength!"
-    } for i in range(25)
-]
-
-
-
-def index(request):
-    paginator = Paginator(questions, 20)
-    page = request.GET.get('page')
-    content = paginator.get_page(page)
-
-    return render(request, "index.html", {'questions':content})
-
-def hot(request):
-    paginator = Paginator(questions, 20)
-    page = request.GET.get('page')
-    content = paginator.get_page(page)
-
-    return render(request, "hot.html", {'questions':content})
-
-def tag(request, tag_name):
-    paginator = Paginator(questions, 20)
-    page = request.GET.get('page')
-    content = paginator.get_page(page)   
-    return render(request, "tag.html", {'questions':content, 'tag_name':tag_name}) #что-то с этим сделать \ здесь должно быть имя тэга
-
-
-comments = [
-    {
-        "text": f"This is comment number {i}."
-    } for i in range(25)
-]
-
-def question(request, id):
-    paginator = Paginator(comments, 20)
-    page = request.GET.get('page')
-    content = paginator.get_page(page)
-
-    return render(request, "question.html", {'comments': content, 'question':questions[id]}) #здесь должен быть номер вопроса
-
-def login(request):
-    return render(request, "login.html", {})
-
-def signup(request):
-    return render(request, "signup.html", {})
-
-def ask(request):
-    return render(request, "ask.html", {})'''
-
-
 from django.db.models import F
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -73,8 +13,8 @@ from django.urls import reverse
 from datetime import date
 from urllib.parse import urlencode
 
-members = Profile.objects.best()[:6]
-popular_tags = Tag.objects.popular()[:6]
+members = Profile.objects.best()[:5]
+popular_tags = Tag.objects.popular()[:5]
 
 
 def content_processor(request):
@@ -95,6 +35,7 @@ def index(request):
     questions = get_paginator(request, questions_list, 10)
     return render(request, 'index.html', {'object_list': questions})
 
+
 def hot_questions(request):
     hot_questions_list = Question.objects.popular()
     hot_questions = get_paginator(request, hot_questions_list, 10)
@@ -108,16 +49,6 @@ def question(request, pk):
     return render(request, 'question.html', {'object_list': answers, 'question': question})
 
 def login(request):
-    return render(request, "login.html", {})
-
-def signup(request):
-    return render(request, "signup.html", {})
-
-def ask(request):
-    return render(request, "ask.html", {})
-
-
-def login(request):
     alert = ""
     if request.method == 'GET':
         form = LoginForm()
@@ -129,7 +60,7 @@ def login(request):
                 auth.login(request, user)
                 next = request.POST.get('next')
                 if not next:
-                    next = 'main'
+                    next = 'index'
                 return redirect(next)
             else:
                 alert = "No user with matching username and password found"
@@ -139,7 +70,7 @@ def login(request):
 @login_required
 def logout(request):
     auth.logout(request)
-    return redirect(reverse('main'))
+    return redirect(reverse('index'))
 
 
 def signup(request):
@@ -154,11 +85,13 @@ def signup(request):
             else:
                 user = User.objects.create_user(form.cleaned_data['username'],
                                                 form.cleaned_data['email'], form.cleaned_data['password1'])
-                profile = Profile(avatar=form.cleaned_data['avatar'], user_id=user.id)
+                profile = Profile(
+                    avatar=form.cleaned_data['avatar'], user_id=user.id)
                 profile.save()
-                user = auth.authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
+                user = auth.authenticate(
+                    username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
                 auth.login(request, user)
-                return redirect('main')
+                return redirect('index')
     return render(request, 'signup.html', {'alert': alert, 'form': form})
 
 
@@ -183,42 +116,42 @@ def ask(request):
                     tag = tag[0]
                 question.tags.add(tag.id)
             question.save()
-            return redirect(reverse('one_question', kwargs={'pk': question.id}))
-    return render(request, 'ask.html', {'form': form })
+            return redirect(reverse('question', kwargs={'pk': question.id}))
+    return render(request, 'ask.html', {'form': form})
 
 
-# @login_required
-# def settings(request):
-#     if request.method == 'GET':
-#         form = SettingsForm(initial={'username': request.user.username, 'email':  request.user.email,
-#                                      'avatar': request.user.profile.avatar})
-#     else:
-#         form = SettingsForm(data=request.POST, files=request.FILES)
-#         if form.is_valid():
-#             user = request.user
-#             user.username = form.cleaned_data['username']
-#             user.email = form.cleaned_data['email']
-#             user.profile.avatar = form.cleaned_data['avatar']
-#             user.profile.save()
-#             user.save()
-#             form = SettingsForm(initial={'username': request.user.username, 'email': request.user.email,
-#                                          'avatar': request.user.profile.avatar})
-#     return render(request, 'settings.html', {'form': form})
+@login_required
+def settings(request):
+    if request.method == 'GET':
+        form = SettingsForm(initial={'username': request.user.username, 'email':  request.user.email,
+                                     'avatar': request.user.profile.avatar})
+    else:
+        form = SettingsForm(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            user = request.user
+            user.username = form.cleaned_data['username']
+            user.email = form.cleaned_data['email']
+            user.profile.avatar = form.cleaned_data['avatar']
+            user.profile.save()
+            user.save()
+            form = SettingsForm(initial={'username': request.user.username, 'email': request.user.email,
+                                         'avatar': request.user.profile.avatar})
+    return render(request, 'settings.html', {'form': form})
 
 
-def tagged_questions (request, str):
+def tagged_questions(request, str):
     tagged_questions_list = Question.objects.tagged(str)
     tagged_questions = get_paginator(request, tagged_questions_list, 10)
-    return render(request, 'tag.html', {'object_list': tagged_questions, 'type': 'tagged', 'tag' : str})
+    return render(request, 'tag.html', {'object_list': tagged_questions, 'type': 'tagged', 'tag': str})
 
 
 @login_required
 def answer(request):
     id = request.POST.get('pk')
     answer = Answer.objects.create(author_id=request.user.profile.id, question_id=id,
-                                   date=date.today(), text=request.POST.get('text'))
+                                   date=date.today(), content=request.POST.get('content'))
     answer.save()
-    return redirect(reverse('single_post', kwargs={'pk': id}))
+    return redirect(reverse('question', kwargs={'pk': id}))
 
 
 def get_option(str):
@@ -237,13 +170,14 @@ def qvote(request):
     error = ""
 
     question = Question.objects.get(id=data['qid'])
-    like = QuestLike.objects.filter(question_id=data['qid'], author_id=request.user.id)
+    like = QuestLike.objects.filter(
+        question_id=data['qid'], author_id=request.user.id)
     if question and not like:
         q_likes = question.q_likes + inc
         question.q_likes = F('q_likes') + inc
         question.save()
         QuestLike.objects.create(question_id=question.id, author_id=request.user.profile.id,
-                                    like=str(inc))
+                                 like=str(inc))
     else:
         error = "Error"
 
@@ -260,10 +194,11 @@ def avote(request):
     answer = Answer.objects.get(id=data['aid'])
     if answer and not AnsLike.objects.filter(answer_id=data['aid'], author_id=request.user.id):
         AnsLike.objects.create(answer_id=data['aid'], author_id=request.user.profile.id,
-                                    like=str(inc))
+                               like=str(inc))
     else:
         error = "Error"
     return JsonResponse({'a_likes': inc, 'error': error})
+
 
 @login_required
 @require_POST

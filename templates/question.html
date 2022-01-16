@@ -8,7 +8,6 @@
     <div class="row row-cols-1 g-0  overflow-hidden  mb-4 shadow-md  position-relative post-block">
         <div class="row d-flex flex-wrap">
             <div class="col-3 p-4">
-                <!-- <img class="card-img-center img-fluid " src="{% static 'img/gamabunta.jpg' %}" alt="Avatar"> -->
                 <img class="card-img-center img-fluid " src="{{ question.author.avatar.url }}" alt="Avatar">
 
                 <div class="rating d-flex justify-content-center align-items-center mt-2">
@@ -56,7 +55,9 @@
 
     <!-- Input comment -->
     <form class="form-floating mb-4" action="/answer/" method="post">
-        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"></textarea>
+        {% csrf_token %}
+        <input type="hidden" name="pk" value="{{ question.id }}" />
+        <textarea name="content" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"></textarea>
         <label for="floatingTextarea2">Enter your answer here ...</label>
         <button class="btn btn-outline-success mt-2" type="submit">Answer</button>
     </form>

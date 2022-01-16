@@ -1,13 +1,15 @@
 {% extends "incl/base.html" %}
 {% load static %}
+{% load bootstrap4 %}
 
 {% block content %}
 
 <form class="col-md-8 mb-5 fs-5 ask" action="/ask/" method="post">
-
+    {% csrf_token %}
     <h3 class="fst-italic mt-2 text-center"> New Question </h3>
 
-    <div class="mb-3 ">
+    {% bootstrap_form form %}
+    <!-- <div class="mb-3 ">
         <label for="exampleFormControlInput1" class="form-label">Title:</label>
         <input class="form-control" id="exampleFormControlInput1">
     </div>
@@ -18,7 +20,7 @@
     <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label">Tags:</label>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
-    </div>
+    </div> -->
     <button class="btn btn-outline-success btn-lg mt-2" type="submit">Ask!</button>
 </form>
 {% endblock content%}

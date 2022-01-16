@@ -21,12 +21,10 @@ class Command(BaseCommand):
         usernames = set()
         profiles = []
         for i in range(cnt):
-            # username = fake.simple_profile().get('username')
-            username = fake.unique.word
+            username = fake.simple_profile().get('username')
 
             while username in usernames:
-                # username = fake.simple_profile().get('username')
-                username = fake.unique.word
+                username = fake.simple_profile().get('username')
 
             user = User.objects.create(
                 username=username,
@@ -34,7 +32,6 @@ class Command(BaseCommand):
             )
             profiles.append(Profile(
                 user_id=user.id,
-                nickname=fake.word(),
                 avatar=choice(self.avatar_list)
             ))
             usernames.add(username)

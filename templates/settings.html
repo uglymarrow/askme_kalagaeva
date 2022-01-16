@@ -1,14 +1,12 @@
 {% extends "incl/base.html" %}
-{% load static %}
 {% load bootstrap4 %}
-
 
 {% block content %}
 <div class="col-md-8">
 
     <h3 class="fst-italic text-center mt-3 mb-3"> Registration </h3>
 
-    <form class="form-margin" enctype="multipart/form-data" action="/signup/" method="post">
+    <form class="form-margin" enctype="multipart/form-data" action="/settings/" method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
         <!-- <label for="login" class="form-label">Login</label>
@@ -32,9 +30,7 @@
         <label for="inputGroupFile02" class="form-label">Upload avatar </label>
         <input type="file" class="form-control" id="inputGroupFile02" accept=".png, .jpg, .jpeg"> -->
 
-
-
-        <button class="w-100 btn btn-success btn-lg" type="submit">Register!</button>
+        <button class="w-100 btn btn-success btn-lg" type="submit">Save</button>
     </form>
 
 </div>
